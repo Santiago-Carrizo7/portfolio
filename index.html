@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santiago Carrizo | Terminal Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-es">
+
+    <header class="window-header">
+        <div class="window-controls">
+            <span class="control-btn close" title="Cerrar"></span>
+            <span class="control-btn minimize" title="Minimizar"></span>
+            <span class="control-btn maximize" title="Maximizar"></span>
+        </div>
+        <div class="window-title">guest@portfolio ~ zsh</div>
+        <nav class="window-menu">
+            <span class="menu-item">
+                <span class="lang-es">Archivo</span>
+                <span class="lang-en">File</span>
+            </span>
+            <span class="menu-item">
+                <span class="lang-es">Edición</span>
+                <span class="lang-en">Edit</span>
+            </span>
+            <span class="menu-item">
+                <span class="lang-es">Ver</span>
+                <span class="lang-en">View</span>
+            </span>
+            <span class="menu-item">Terminal</span>
+            <span class="menu-item">
+                <span class="lang-es">Ayuda</span>
+                <span class="lang-en">Help</span>
+            </span>
+        </nav>
+    </header>
+
+    <div class="terminal-layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-user">
+                <div class="user-info">
+                    <span class="user-name">guest@portfolio</span>
+                    <span class="user-meta">zsh - 5.9 (x86_64)</span>
+                </div>
+                <div class="git-branch">main branch</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="#about" class="nav-link active">
+                            <span class="lang-es">~/sobre-mi</span>
+                            <span class="lang-en">~/about</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#skills" class="nav-link">
+                            <span class="lang-es">~/habilidades</span>
+                            <span class="lang-en">~/skills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#projects" class="nav-link">
+                            <span class="lang-es">~/proyectos</span>
+                            <span class="lang-en">~/projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="nav-link">
+                            <span class="lang-es">~/contacto</span>
+                            <span class="lang-en">~/contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="lang-selector">
+                <button type="button" id="lang-toggle" class="lang-btn">
+                    <span class="lang-es">[ ES / EN ]</span>
+                    <span class="lang-en">[ EN / ES ]</span>
+                </button>
+            </div>
+
+            <div class="sidebar-actions">
+                <a href="assets/cv_santiago_carrizo.pdf" download class="action-btn">
+                    <span class="lang-es">📄 mi_cv.pdf</span>
+                    <span class="lang-en">📄 my_resume.pdf</span>
+                </a>
+                <a href="https://github.com/Santiago-Carrizo7" target="_blank" rel="noopener" class="action-btn">GitHub</a>
+                <a href="https://linkedin.com/in/santiago-carrizo-dev" target="_blank" rel="noopener" class="action-btn">LinkedIn</a>
+            </div>
+        </aside>
+
+        <main class="console-body">
+            
+            <section id="about" class="terminal-section">
+                <pre class="ascii-logo">
+    ____  ____  ____  ______ _____ ____  __    ____ ____ 
+   / __ \/ __ \/ __ \/_  __// ____/ __ \/ /   /  _// __ \
+  / /_/ / / / / /_/ / / /  / /_  / / / / /    / / / / / /
+ / ____/ /_/ / _, _/ / /  / __/ / /_/ / /____/ / / /_/ / 
+/_/    \____/_/ |_| /_/  /_/    \____/_____/___/ \____/  
+                </pre>
+
+                <div class="system-welcome">
+                    <p class="lang-es">Último inicio de sesión: Mié Oct 25 14:20:01 en ttys001</p>
+                    <p class="lang-en">Last login: Wed Oct 25 14:20:01 on ttys001</p>
+                    <p class="lang-es">Bienvenido a PortfolioOS v1.0.0 — Santiago Carrizo (Salta, Argentina)</p>
+                    <p class="lang-en">Welcome to PortfolioOS v1.0.0 — Santiago Carrizo (Salta, Argentina)</p>
+                </div>
+
+                <article class="command-block">
+                    <p class="prompt">
+                        <span class="lang-es">guest@portfolio : ~/sobre-mi $ <code>quiensoy</code></span>
+                        <span class="lang-en">guest@portfolio : ~/about $ <code>whoami</code></span>
+                    </p>
+                    <div class="command-output bio-output">
+                        <h1>Santiago Carrizo — Full Stack Developer</h1>
+                        <p class="lang-es">
+                            ¡Hola! Soy Desarrollador Full Stack enfocado en construir aplicaciones web y móviles completas, robustas y orientadas a producto. 
+                            Mi experiencia se centra en el ecosistema TypeScript/JavaScript (React 19, Node.js, Express 5) y desarrollo móvil cross-platform con Flutter. 
+                            Me apasiona diseñar sistemas que resuelven problemas reales de negocio: desde digitalizar la gestión física de inventarios hasta construir arquitecturas SaaS multi-tenant con soporte offline-first.
+                        </p>
+                        <p class="lang-en">
+                            Hi! I'm a Full Stack Developer focused on building complete, robust, product-oriented web and mobile applications. 
+                            My core expertise centers on the TypeScript/JavaScript ecosystem (React 19, Node.js, Express 5) and cross-platform mobile development with Flutter. 
+                            I'm passionate about designing systems that solve real business problems: from digitalizing physical inventory management to building multi-tenant SaaS architectures with offline-first support.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="command-block">
+                    <p class="prompt">
+                        <span class="lang-es">guest@portfolio : ~/sobre-mi $ <code>cat ./formacion_e_intereses.txt</code></span>
+                        <span class="lang-en">guest@portfolio : ~/about $ <code>cat ./education_and_interests.txt</code></span>
+                    </p>
+                    <div class="command-output info-card">
+                        <div class="info-group">
+                            <h3>
+                                <span class="lang-es">Formación Académica & Certificaciones</span>
+                                <span class="lang-en">Education & Certifications</span>
+                            </h3>
+                            <ul>
+                                <li>
+                                    <strong class="text-green">Tecnicatura Universitaria en Programación (UNSa)</strong> 
+                                    <br>
+                                    <span class="lang-es">Universidad Nacional de Salta — Formación en arquitecturas web, paradigmas de programación, bases de datos relacionales y desarrollo Full Stack.</span>
+                                    <span class="lang-en">National University of Salta — Focus on web architecture, programming paradigms, relational databases, and Full Stack development.</span>
+                                </li>
+                                <li>
+                                    <strong class="text-yellow">JSCamp (InfoJobs) — Dictado por MiduDev</strong> 
+                                    <br>
+                                    <span class="lang-es">Formación intensiva en desarrollo Full Stack moderno (JavaScript, TypeScript, React, Node.js y arquitectura web avanzada). </span>
+                                    <span class="lang-en">Intensive Full Stack modern web development course (JavaScript, TypeScript, React, Node.js, and advanced web architecture). </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="info-group">
+                            <h3>
+                                <span class="lang-es">Lo que aporto en mis proyectos</span>
+                                <span class="lang-en">Key Technical Value</span>
+                            </h3>
+                            <ul>
+                                <li>
+                                    <strong class="text-cyan">Backend & DB:</strong> 
+                                    <span class="lang-es">Diseño de APIs RESTful con Node.js y Express 5, modelado relacional con PostgreSQL y Prisma ORM, consultas complejas indexadas (búsquedas difusas con pg_trgm) y transacciones ACID.</span>
+                                    <span class="lang-en">RESTful API design with Node.js & Express 5, relational modeling with PostgreSQL & Prisma ORM, indexed fuzzy search (pg_trgm), and ACID transactions.</span>
+                                </li>
+                                <li>
+                                    <strong class="text-cyan">Frontend Web:</strong> 
+                                    <span class="lang-es">Creación de SPAs rápidas e interactivas con React 19, TypeScript, Tailwind CSS, y gestión eficiente del estado asíncrono con TanStack Query y Zustand.</span>
+                                    <span class="lang-en">Building fast, interactive SPAs with React 19, TypeScript, Tailwind CSS, and efficient async state management with TanStack Query and Zustand.</span>
+                                </li>
+                                <li>
+                                    <strong class="text-cyan">Desarrollo Móvil:</strong> 
+                                    <span class="lang-es">Construcción de apps en Flutter/Dart con persistencia local en SQLite para funcionamiento sin conexión y sincronización idempotente por lotes.</span>
+                                    <span class="lang-en">Building Flutter/Dart mobile apps with local SQLite persistence for offline capability and batch idempotent synchronization.</span>
+                                </li>
+                                <li>
+                                    <strong class="text-cyan">Seguridad & Integraciones:</strong> 
+                                    <span class="lang-es">Autenticación JWT con Refresh Token Rotation, cookies seguras HTTPOnly, protección IDOR por tenant e integración de pasarelas de pago (Mercado Pago API) y notificaciones push (Firebase FCM).</span>
+                                    <span class="lang-en">JWT Authentication with Refresh Token Rotation, HTTPOnly secure cookies, tenant IDOR protection, payment gateways (Mercado Pago API), and push notifications (Firebase FCM).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="command-block">
+                    <p class="prompt">
+                        <span class="lang-es">guest@portfolio : ~/sobre-mi $ <code>./descargar_cv.sh</code></span>
+                        <span class="lang-en">guest@portfolio : ~/about $ <code>./download_resume.sh</code></span>
+                    </p>
+                    <div class="command-output">
+                        <p class="lang-es" style="margin-bottom: 12px;">Podés descargar mi Currículum Vitae en formato PDF:</p>
+                        <p class="lang-en" style="margin-bottom: 12px;">You can download a complete PDF version of my Resume:</p>
+                        
+                        <a href="assets/cv_santiago_carrizo.pdf" download class="cv-button">
+                            <span class="lang-es">[ DESCARGAR_CV.PDF ]</span>
+                            <span class="lang-en">[ DOWNLOAD_RESUME.PDF ]</span>
+                        </a>
+                    </div>
+                </article>
+
+                <div class="prompt-line">
+                    <span class="lang-es">guest@portfolio : ~/sobre-mi $ <span class="cursor">█</span></span>
+                    <span class="lang-en">guest@portfolio : ~/about $ <span class="cursor">█</span></span>
+                </div>
+            </section>
+
+            <section id="skills" class="terminal-section">
+                <article class="command-block">
+                    <p class="prompt">
+                        <span class="lang-es">guest@portfolio : ~/habilidades $ <code>cat ./habilidades.json</code></span>
+                        <span class="lang-en">guest@portfolio : ~/skills $ <code>cat ./skills.json</code></span>
+                    </p>
+                    
+                    <div class="json-viewer">
+                        <div class="lang-es">
+                            <pre class="json-content"><code>{
+  <span class="json-key">"desarrollador"</span>: <span class="json-string">"Santiago Carrizo"</span>,
+  <span class="json-key">"ubicacion"</span>: <span class="json-string">"Salta, Argentina"</span>,
+  <span class="json-key">"institucion"</span>: <span class="json-string">"Universidad Nacional de Salta (UNSa)"</span>,
+  
+  <span class="json-key">"frontend"</span>: [
+    <span class="json-string">"React 19 & React Router"</span>,
+    <span class="json-string">"TypeScript / JavaScript (ES6+)"</span>,
+    <span class="json-string">"Tailwind CSS / HTML5 & CSS3"</span>,
+    <span class="json-string">"TanStack Query & Zustand"</span>
+  ],
+
+  <span class="json-key">"backend"</span>: [
+    <span class="json-string">"Node.js & Express 5"</span>,
+    <span class="json-string">"Diseño de APIs RESTful"</span>,
+    <span class="json-string">"Arquitectura SaaS Multi-Tenant & MVC"</span>,
+    <span class="json-string">"JWT & Refresh Token Rotation"</span>
+  ],
+
+  <span class="json-key">"bases_de_datos"</span>: [
+    <span class="json-string">"PostgreSQL & Prisma ORM"</span>,
+    <span class="json-string">"MySQL"</span>,
+    <span class="json-string">"Búsquedas Difusas (pg_trgm) & Transacciones ACID"</span>
+  ],
+
+  <span class="json-key">"desarrollo_mobile"</span>: [
+    <span class="json-string">"Flutter & Dart"</span>,
+    <span class="json-string">"Persistencia Local (SQLite - Offline-First)"</span>,
+    <span class="json-string">"Sincronización Idempotente por Lotes"</span>
+  ],
+
+  <span class="json-key">"integraciones_y_testing"</span>: [
+    <span class="json-string">"Mercado Pago API"</span>,
+    <span class="json-string">"Firebase FCM (Push Notifications)"</span>,
+    <span class="json-string">"Docker, Vitest & Playwright"</span>,
+    <span class="json-string">"Git / GitHub Workflow & Postman"</span>
+  ]
+}</code></pre>
+                        </div>
+
+                        <div class="lang-en">
+                            <pre class="json-content"><code>{
+  <span class="json-key">"developer"</span>: <span class="json-string">"Santiago Carrizo"</span>,
+  <span class="json-key">"location"</span>: <span class="json-string">"Salta, Argentina"</span>,
+  <span class="json-key">"education"</span>: <span class="json-string">"National University of Salta (UNSa)"</span>,
+  
+  <span class="json-key">"frontend"</span>: [
+    <span class="json-string">"React 19 & React Router"</span>,
+    <span class="json-string">"TypeScript / JavaScript (ES6+)"</span>,
+    <span class="json-string">"Tailwind CSS / HTML5 & CSS3"</span>,
+    <span class="json-string">"TanStack Query & Zustand"</span>
+  ],
+
+  <span class="json-key">"backend"</span>: [
+    <span class="json-string">"Node.js & Express 5"</span>,
+    <span class="json-string">"RESTful API Design"</span>,
+    <span class="json-string">"Multi-Tenant SaaS Architecture & MVC"</span>,
+    <span class="json-string">"JWT & Refresh Token Rotation"</span>
+  ],
+
+  <span class="json-key">"databases"</span>: [
+    <span class="json-string">"PostgreSQL & Prisma ORM"</span>,
+    <span class="json-string">"MySQL"</span>,
+    <span class="json-string">"Fuzzy Search (pg_trgm) & ACID Transactions"</span>
+  ],
+
+  <span class="json-key">"mobile_development"</span>: [
+    <span class="json-string">"Flutter & Dart"</span>,
+    <span class="json-string">"Local Persistence (SQLite - Offline-First)"</span>,
+    <span class="json-string">"Batch Idempotent Synchronization"</span>
+  ],
+
+  <span class="json-key">"integrations_and_testing"</span>: [
+    <span class="json-string">"Mercado Pago API"</span>,
+    <span class="json-string">"Firebase FCM (Push Notifications)"</span>,
+    <span class="json-string">"Docker, Vitest & Playwright"</span>,
+    <span class="json-string">"Git / GitHub Workflow & Postman"</span>
+  ]
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="prompt-line">
+                    <span class="lang-es">guest@portfolio : ~/habilidades $ <span class="cursor">█</span></span>
+                    <span class="lang-en">guest@portfolio : ~/skills $ <span class="cursor">█</span></span>
+                </div>
+            </section>
+
+            <section id="projects" class="terminal-section">
+                <article class="command-block">
+                    <p class="prompt">
+                        <span class="lang-es">guest@portfolio : ~/proyectos $ <code>cat ./proyectos.json</code></span>
+                        <span class="lang-en">guest@portfolio : ~/projects $ <code>cat ./projects.json</code></span>
+                    </p>
+
+                    <div class="projects-grid">
+                        
+                        <article class="project-card" id="alma-lectora">
+                            <div class="project-header">
+                                <h2 class="project-title">alma-lectora</h2>
+                                <span class="status-badge deployed">
+                                    <span class="lang-es">● Web Desplegada</span>
+                                    <span class="lang-en">● Live Web</span>
+                                </span>
+                            </div>
+                            <p class="project-desc lang-es">Plataforma web para gestión de catálogo de libros, reseñas literarias y seguimiento de lecturas. Interfaz moderna desarrollada con TypeScript y React.</p>
+                            <p class="project-desc lang-en">Web platform for book catalog management, literary reviews, and reading tracking. Modern reactive UI built with TypeScript and React.</p>
+                            <div class="project-techs">
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">CSS3</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Santiago-Carrizo7/alma-lectora" target="_blank" rel="noopener" class="project-link">
+                                    <span class="lang-es">[ Código GitHub ]</span>
+                                    <span class="lang-en">[ GitHub Code ]</span>
+                                </a>
+                                <a href="https://alma-lectora.vercel.app" target="_blank" rel="noopener" class="project-link demo-link">
+                                    <span class="lang-es">[ Ir a la Web ]</span>
+                                    <span class="lang-en">[ Visit Web ]</span>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="project-card" id="gestion-deportiva">
+                            <div class="project-header">
+                                <h2 class="project-title">gestion-deportiva-fullstack</h2>
+                                <span class="status-badge deployed">
+                                    <span class="lang-es">● Web Desplegada</span>
+                                    <span class="lang-en">● Live Web</span>
+                                </span>
+                            </div>
+                            <p class="project-desc lang-es">Sistema integral multitenant para administración de complejos deportivos, reservas de turnos y gestión de clientes. Arquitectura desacoplada (Frontend React, Backend Node.js/Express y App Móvil Flutter con soporte offline-first).</p>
+                            <p class="project-desc lang-en">Comprehensive multi-tenant system for sports complex management, shift booking, and client administration. Decoupled architecture (React Frontend, Node.js/Express Backend, Flutter Mobile App with offline-first support).</p>
+                            <div class="project-techs">
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">React 19</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express 5</span>
+                                <span class="tech-tag">PostgreSQL / Prisma</span>
+                                <span class="tech-tag">Flutter / Dart</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Santiago-Carrizo7/gestion-deportiva-client" target="_blank" rel="noopener" class="project-link">
+                                    <span class="lang-es">[ Repo Frontend ]</span>
+                                    <span class="lang-en">[ Frontend Repo ]</span>
+                                </a>
+                                <a href="https://github.com/Santiago-Carrizo7/gestion-deportiva-server" target="_blank" rel="noopener" class="project-link">
+                                    <span class="lang-es">[ Repo Backend ]</span>
+                                    <span class="lang-en">[ Backend Repo ]</span>
+                                </a>
+                                <a href="https://gestion-deportiva-client.vercel.app/" target="_blank" rel="noopener" class="project-link demo-link">
+                                    <span class="lang-es">[ Ir a la Web ]</span>
+                                    <span class="lang-en">[ Visit Web ]</span>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="project-card" id="ecommerce">
+                            <div class="project-header">
+                                <h2 class="project-title">react-express-mysql-ecommerce</h2>
+                                <span class="status-badge deployed">
+                                    <span class="lang-es">● Web Desplegada</span>
+                                    <span class="lang-en">● Live Web</span>
+                                </span>
+                            </div>
+                            <p class="project-desc lang-es">Plataforma de comercio electrónico Full Stack con patrón de arquitectura MVC. Catálogo interactivo de productos, carrito de compras, gestión de pedidos y almacenamiento relacional en MySQL.</p>
+                            <p class="project-desc lang-en">Full Stack E-commerce platform following MVC architecture pattern. Interactive product catalog, shopping cart, order management, and relational MySQL database.</p>
+                            <div class="project-techs">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">TypeScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Santiago-Carrizo7/react-express-mysql-ecommerce" target="_blank" rel="noopener" class="project-link">
+                                    <span class="lang-es">[ Código GitHub ]</span>
+                                    <span class="lang-en">[ GitHub Code ]</span>
+                                </a>
+                                <a href="https://ecommerce-scarrizo.vercel.app/" target="_blank" rel="noopener" class="project-link demo-link">
+                                    <span class="lang-es">[ Ir a la Web ]</span>
+                                    <span class="lang-en">[ Visit Web ]</span>
+                                </a>
+                            </div>
+                        </article>
+
+                    </div>
+                </article>
+
+                <div class="prompt-line">
+                    <span class="lang-es">guest@portfolio : ~/proyectos $ <span class="cursor">█</span></span>
+                    <span class="lang-en">guest@portfolio : ~/projects $ <span class="cursor">█</span></span>
+                </div>
+            </section>
+
+            <section id="contact" class="terminal-section">
+                <article class="command-block">
+                    <p class="prompt">
+                        <span class="lang-es">guest@portfolio : ~/contacto $ <code>./contacto.sh</code></span>
+                        <span class="lang-en">guest@portfolio : ~/contact $ <code>./contact.sh</code></span>
+                    </p>
+
+                    <div class="script-log">
+                        <p>[ <span class="log-ok">OK</span> ] 
+                            <span class="lang-es">Secuencia de inicialización completa.</span>
+                            <span class="lang-en">Initialization sequence complete.</span>
+                        </p>
+                        <p>[ <span class="log-ok">OK</span> ] 
+                            <span class="lang-es">Estableciendo conexión segura...</span>
+                            <span class="lang-en">Establishing secure connection...</span>
+                        </p>
+                        <p>
+                            <span class="lang-es">Iniciando protocolo de contacto v1.0.4</span>
+                            <span class="lang-en">Starting contact protocol v1.0.4</span>
+                        </p>
+                    </div>
+
+                    <form action="send_message.php" method="POST" class="terminal-form">
+                        <div class="form-row">
+                            <label for="name">
+                                <span class="lang-es">Ingresá tu nombre: &gt;</span>
+                                <span class="lang-en">Enter your name: &gt;</span>
+                            </label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="email">
+                                <span class="lang-es">Ingresá tu email: &gt;</span>
+                                <span class="lang-en">Enter your email: &gt;</span>
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="message">
+                                <span class="lang-es">Mensaje: &gt;</span>
+                                <span class="lang-en">Message: &gt;</span>
+                            </label>
+                            <textarea id="message" name="message" rows="4" required placeholder="Escribí tu mensaje aquí... / Type your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <span class="lang-es">[ ENVIAR_MENSAJE ]</span>
+                            <span class="lang-en">[ SEND_MESSAGE ]</span>
+                        </button>
+                    </form>
+
+                    <div class="env-variables">
+                        <h3>
+                            <span class="lang-es"># Variables de Entorno (Redes Sociales)</span>
+                            <span class="lang-en"># Environment Variables (Social Links)</span>
+                        </h3>
+                        <p>EXPORT GITHUB="<a href="https://github.com/Santiago-Carrizo7" target="_blank" rel="noopener">github.com/Santiago-Carrizo7</a>"</p>
+                        <p>EXPORT LINKEDIN="<a href="https://linkedin.com/in/santiago-carrizo-dev" target="_blank" rel="noopener">linkedin.com/in/santiago-carrizo-dev</a>"</p>
+                        <p>EXPORT EMAIL="<a href="mailto:santiago.carrizo.dev@gmail.com">santiago.carrizo.dev@gmail.com</a>"</p>
+                    </div>
+                </article>
+
+                <div class="prompt-line">
+                    <span class="lang-es">guest@portfolio : ~/contacto $ <span class="cursor">█</span></span>
+                    <span class="lang-en">guest@portfolio : ~/contact $ <span class="cursor">█</span></span>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="status-bar">
+        <div class="status-left">
+            <span class="lang-es">guest@portfolio:~$ última sesión: Mié Oct 25 14:20:01 en ttys001</span>
+            <span class="lang-en">guest@portfolio:~$ last login: Wed Oct 25 14:20:01 on ttys001</span>
+        </div>
+        <div class="status-right">
+            <span class="status-item">utf-8</span>
+            <span class="status-item git-branch">git:main*</span>
+            <span class="status-item">ssh</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
