@@ -23,37 +23,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
 
+    const sections = document.querySelectorAll('.terminal-section');
+    
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             navLinks.forEach(l => l.classList.remove('active'));
+
+            const targetSection = document.querySelector(link.getAttribute('href'));
+
+            sections.forEach(sec => {
+                if(sec.classList.contains('active-section')){
+                    sec.classList.remove('active-section')
+                }
+                sec.classList.add('hidden')
+            });
+            
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
             
             link.classList.add('active');
         });
     });
 
+
     const contactForm = document.querySelector('.terminal-form');
-    const scriptLog = document.querySelector('.script-log');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault(); 
 
-            const nameInput = document.getElementById('name').value;
-
-            const logSuccess = document.createElement('p');
-            logSuccess.style.color = 'var(--color-green)';
-            logSuccess.style.marginTop = '8px';
             
-            logSuccess.innerHTML = `
-                [ <span class="log-ok">OK</span> ] 
-                <span class="lang-es">¡Gracias ${nameInput}! Mensaje enviado correctamente a la terminal.</span>
-                <span class="lang-en">Thank you ${nameInput}! Message sent successfully to terminal.</span>
-            `;
 
-            scriptLog.appendChild(logSuccess);
+            const formData = new FormData(contactForm);
 
-            contactForm.reset();
+            try {
+                const res = await fetch('send_message.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if(res.ok){
+                    contactForm.reset();
+                }
+                
+                const data = await res.json();
+                console.log('Respuesta del servidor:', data);
+            } catch (error) {
+                console.error('Error al enviar:', error);
+            }
+
         });
     }
-
 });
