@@ -14,6 +14,10 @@ desktop.ini
 *.sublime-workspace
 *.sublime-project
 
-# Logs
+# Logs & local message storage
 *.log
 error_log
+mensajes.txt
+
+# Documentation & study notes
+docs/
