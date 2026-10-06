@@ -1,0 +1,95 @@
+[
+  {
+    "id": 1,
+    "slug": "alma-lectora",
+    "title": "alma-lectora",
+    "status": {
+      "key": "deployed",
+      "es": "● En producción",
+      "en": "● Live"
+    },
+    "description": {
+      "es": "Plataforma web para la gestión de catálogos, inventarios y administración, desarrollada con React, TypeScript, Node.js y PostgreSQL.",
+      "en": "Full-stack web platform for catalog, inventory, and administrative management, built with React, TypeScript, Node.js, and PostgreSQL."
+    },
+    "technologies": [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "CSS3"
+    ],
+    "repositories": [
+      {
+        "label": {
+          "es": "[ Repositorio Público ]",
+          "en": "[ Public Repo ]"
+        },
+        "url": "https://github.com/Santiago-Carrizo7/alma-lectora-showcase"
+      }
+    ],
+    "demo_url": "https://alma-lectora.vercel.app"
+  },
+  {
+    "id": 2,
+    "slug": "GADI - Gestion Administrativa Deportiva Integral",
+    "title": "gestion-deportiva-fullstack",
+    "status": {
+      "key": "deployed",
+      "es": "● En producción",
+      "en": "● Live"
+    },
+    "description": {
+      "es": "Sistema SaaS B2B multi-tenant para la gestión integral de clubes e instituciones deportivas. Arquitectura desacoplada con Frontend React, Backend Node.js/Express y App Móvil Flutter con soporte offline-first.",
+      "en": "Multi-tenant B2B SaaS for the comprehensive management of sports clubs and organizations. Decoupled architecture with a React frontend, Node.js/Express backend, and Flutter mobile app with offline-first support."
+    },
+    "technologies": [
+      "TypeScript",
+      "React 19",
+      "Node.js",
+      "Express 5",
+      "PostgreSQL / Prisma",
+      "Flutter / Dart"
+    ],
+    "repositories": [
+      {
+        "label": {
+          "es": "[ Repositorio Público ]",
+          "en": "[ Public Repo ]"
+        },
+        "url": "https://github.com/Santiago-Carrizo7/gestion-deportiva-showcase"
+      }
+    ],
+    "demo_url": "https://gestion-deportiva-client.vercel.app/"
+  },
+  {
+    "id": 3,
+    "slug": "ecommerce",
+    "title": "react-express-mysql-ecommerce",
+    "status": {
+      "key": "deployed",
+      "es": "● En producción",
+      "en": "● Live"
+    },
+    "description": {
+      "es": "Plataforma de comercio electrónico Full Stack con patrón de arquitectura MVC. Catálogo interactivo de productos, carrito de compras, gestión de pedidos y almacenamiento relacional en MySQL.",
+      "en": "Full Stack E-commerce platform following MVC architecture pattern. Interactive product catalog, shopping cart, order management, and relational MySQL database."
+    },
+    "technologies": [
+      "React",
+      "Node.js",
+      "Express",
+      "MySQL",
+      "TypeScript"
+    ],
+    "repositories": [
+      {
+        "label": {
+          "es": "[ Repositorio Público ]",
+          "en": "[ Public Repo ]"
+        },
+        "url": "https://github.com/Santiago-Carrizo7/react-express-mysql-ecommerce"
+      }
+    ],
+    "demo_url": "https://ecommerce-scarrizo.vercel.app/"
+  }
+]

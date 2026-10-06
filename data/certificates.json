@@ -1,0 +1,34 @@
+[
+  {
+    "id": "aprende-sql",
+    "title": {
+      "es": "Aprende SQL — MiduDev",
+      "en": "Learn SQL — MiduDev"
+    },
+    "issuer": "MiduDev",
+    "date": "2024",
+    "description": {
+      "es": "Formación práctica en diseño de esquemas relacionales, consultas SQL, joins complejos, funciones de agregación y optimización de datos.",
+      "en": "Practical training in relational schema design, SQL queries, complex joins, aggregation functions, and data optimization."
+    },
+    "image": "assets/certificates/aprendesql-certificado.jpg",
+    "pdf": "assets/certificates/aprendesql-certificado.pdf",
+    "skills": ["SQL", "Bases de Datos Relacionales", "Diseño de Esquemas", "Optimización"]
+  },
+  {
+    "id": "desarrollo-con-ia",
+    "title": {
+      "es": "Desarrollo con Inteligencia Artificial",
+      "en": "AI-Assisted Software Development"
+    },
+    "issuer": "MoureDev & BIG school",
+    "date": "2025",
+    "description": {
+      "es": "Formación en desarrollo de software asistido por IA, prompting avanzado, uso de agentes y diseño de workflows estructurados para trabajar con LLMs.",
+      "en": "Training in AI-assisted software development, advanced prompting, agent-based workflows, and structured approaches for working with LLMs."
+    },
+    "image": "assets/certificates/desarrollo-con-ia-certificado.jpg",
+    "pdf": "assets/certificates/desarrollo-con-ia-certificado.pdf",
+    "skills": ["Inteligencia Artificial", "LLMs", "AI Tooling", "Ingeniería de Software"]
+  }
+]

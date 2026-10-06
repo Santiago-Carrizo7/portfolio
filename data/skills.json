@@ -1,0 +1,76 @@
+{
+  "es": {
+    "desarrollador": "Santiago Carrizo",
+    "carrera": "Tecnicatura Universitaria en Programación - Universidad Nacional de Salta (UNSa)",
+    "ubicacion": "Salta, Argentina",
+    "frontend": [
+      "React 19 & React Router",
+      "TypeScript / JavaScript (ES6+)",
+      "Tailwind CSS / HTML5 & CSS3",
+      "TanStack Query & Zustand"
+    ],
+    "backend": [
+      "Node.js & Express 5",
+      "PHP & Laravel",
+      "Diseño de APIs RESTful",
+      "Arquitectura SaaS Multi-Tenant & MVC",
+      "JWT & Refresh Token Rotation"
+    ],
+    "bases_de_datos": [
+      "PostgreSQL & Prisma ORM",
+      "SQLite",
+      "SQL & Diseño de Bases de Datos Relacionales",
+      "Transacciones ACID"
+    ],
+    "desarrollo_mobile": [
+      "Flutter & Dart",
+      "Persistencia Local (SQLite - Offline-First)",
+      "Sincronización Idempotente por Lotes"
+    ],
+    "integraciones_y_testing": [
+      "Git & GitHub Workflow",
+      "Docker",
+      "Postman",
+      "Vitest & Playwright",
+      "Mercado Pago API",
+      "Firebase FCM"
+    ]
+  },
+  "en": {
+    "developer": "Santiago Carrizo",
+    "degree": "Programming Technician — National University of Salta (UNSa)",
+    "location": "Salta, Argentina",
+    "frontend": [
+      "React 19 & React Router",
+      "TypeScript / JavaScript (ES6+)",
+      "Tailwind CSS / HTML5 & CSS3",
+      "TanStack Query & Zustand"
+    ],
+    "backend": [
+      "Node.js & Express 5",
+      "PHP & Laravel",
+      "RESTful API Design",
+      "Multi-Tenant SaaS Architecture & MVC",
+      "JWT & Refresh Token Rotation"
+    ],
+    "databases": [
+      "SQL & Relational Database Design",
+      "PostgreSQL & Prisma ORM",
+      "SQLite",
+      "ACID Transactions"
+    ],
+    "mobile_development": [
+      "Flutter & Dart",
+      "Local Persistence (SQLite - Offline-First)",
+      "Batch Idempotent Synchronization"
+    ],
+    "integrations_and_testing": [
+      "Git & GitHub Workflow",
+      "Docker",
+      "Postman",
+      "Vitest & Playwright",
+      "Mercado Pago API",
+      "Firebase FCM"
+    ]
+  }
+}

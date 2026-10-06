@@ -1,0 +1,93 @@
+{
+  "name": "Santiago Carrizo",
+  "title": {
+    "es": "Santiago Carrizo — Full Stack Developer",
+    "en": "Santiago Carrizo — Full Stack Developer"
+  },
+  "role": {
+    "es": "Desarrollador Full Stack",
+    "en": "Full Stack Developer"
+  },
+  "degree": {
+    "es": "Técnico Universitario en Programación",
+    "en": "University Programming Technician"
+  },
+  "location": "Salta, Argentina",
+  "status": {
+    "es": "Activo • Abierto a nuevas oportunidades",
+    "en": "Active • Open to new opportunities"
+  },
+  "availability": {
+    "es": "DISPONIBLE",
+    "en": "AVAILABLE"
+  },
+  "bio": {
+    "es": "¡Hola! Soy Desarrollador Full Stack enfocado en construir aplicaciones web y móviles completas, robustas y orientadas a producto. Mi experiencia se centra en el ecosistema TypeScript/JavaScript (React 19, Node.js, Express 5), PostgreSQL y desarrollo móvil cross-platform con Flutter. Me apasiona diseñar sistemas que resuelven problemas reales de negocio: desde digitalizar la gestión física de inventarios hasta construir arquitecturas SaaS multi-tenant con soporte offline-first.",
+    "en": "Hi! I'm a Full Stack Developer focused on building complete, maintainable, product-oriented web and mobile applications. My main technical focus is the TypeScript/JavaScript ecosystem (React 19, Node.js, Express 5), PostgreSQL, and cross-platform mobile development with Flutter. I'm passionate about designing systems that solve real business problems: from digitalizing physical inventory management to building multi-tenant SaaS architectures with offline-first support."
+  },
+  "education": [
+    {
+      "title": "Tecnicatura Universitaria en Programación (UNSa)",
+      "color": "text-green",
+      "desc": {
+        "es": "Universidad Nacional de Salta — Formación en arquitecturas web, paradigmas de programación, bases de datos relacionales y desarrollo Full Stack.",
+        "en": "National University of Salta — Focus on web architecture, programming paradigms, relational databases, and Full Stack development."
+      }
+    },
+    {
+      "title": "JSCamp (InfoJobs) — Dictado por MiduDev",
+      "color": "text-yellow",
+      "desc": {
+        "es": "Formación intensiva en desarrollo Full Stack moderno (JavaScript, TypeScript, React, Node.js y arquitectura web avanzada).",
+        "en": "Intensive Full Stack modern web development course (JavaScript, TypeScript, React, Node.js, and advanced web architecture)."
+      }
+    }
+  ],
+  "technical_value": [
+    {
+      "label": {
+        "es": "Backend & DB:",
+        "en": "Backend & DB:"
+      },
+      "desc": {
+        "es": "Diseño de APIs RESTful con Node.js y Express 5, modelado relacional con PostgreSQL y Prisma ORM, consultas complejas indexadas (búsquedas difusas con pg_trgm) y transacciones ACID.",
+        "en": "RESTful API design with Node.js & Express 5, relational modeling with PostgreSQL & Prisma ORM, indexed fuzzy search (pg_trgm), and ACID transactions."
+      }
+    },
+    {
+      "label": {
+        "es": "Frontend Web:",
+        "en": "Frontend Web:"
+      },
+      "desc": {
+        "es": "Creación de SPAs rápidas e interactivas con React 19, TypeScript, Tailwind CSS, y gestión eficiente del estado asíncrono con TanStack Query y Zustand.",
+        "en": "Building fast, interactive SPAs with React 19, TypeScript, Tailwind CSS, and efficient async state management with TanStack Query and Zustand."
+      }
+    },
+    {
+      "label": {
+        "es": "Desarrollo Móvil:",
+        "en": "Mobile Development:"
+      },
+      "desc": {
+        "es": "Construcción de apps en Flutter/Dart con persistencia local en SQLite para funcionamiento sin conexión y sincronización idempotente por lotes.",
+        "en": "Building Flutter/Dart mobile apps with local SQLite persistence for offline capability and batch idempotent synchronization."
+      }
+    },
+    {
+      "label": {
+        "es": "Seguridad & Integraciones:",
+        "en": "Security & Integrations:"
+      },
+      "desc": {
+        "es": "Autenticación JWT con Refresh Token Rotation, cookies seguras HTTPOnly, protección IDOR por tenant e integración de pasarelas de pago (Mercado Pago API) y notificaciones push (Firebase FCM).",
+        "en": "JWT Authentication with Refresh Token Rotation, HTTPOnly secure cookies, tenant IDOR protection, payment gateways (Mercado Pago API), and push notifications (Firebase FCM)."
+      }
+    }
+  ],
+  "socials": {
+    "github": "https://github.com/Santiago-Carrizo7",
+    "linkedin": "https://linkedin.com/in/santiago-carrizo-dev",
+    "email": "santiago.carrizo.dev@gmail.com"
+  }
+}
