@@ -1,7 +1,7 @@
 /**
  * ============================================================================
  * SANTIAGO CARRIZO — TERMINAL PORTFOLIO JAVASCRIPT
- * Vanilla JS (ES6+) • Tab Navigation • Bilingüe • Formulario Asíncrono • Mini CLI
+ * Vanilla JS (ES6+) • Client-Side Navigation • Bilingüe • Terminal CLI
  * ============================================================================
  */
 
@@ -56,19 +56,252 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ------------------------------------------------------------------------
-    // 2. NAVEGACIÓN POR PESTAÑAS (Muestra solo la sección activa)
+    // 1.5 CARGA DINÁMICA DE ARCHIVOS JSON (profile, skills, projects, certificates)
     // ------------------------------------------------------------------------
-    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function formatJsonWithHighlight(obj) {
+        const entries = Object.entries(obj);
+        const lines = entries.map(([key, val], idx) => {
+            const isLast = idx === entries.length - 1;
+            const comma = isLast ? '' : ',';
+            const keyHtml = `  <span class="json-key">"${escapeHtml(key)}"</span>: `;
+
+            if (Array.isArray(val)) {
+                const items = val.map((item, i) => {
+                    const itemComma = i === val.length - 1 ? '' : ',';
+                    return `    <span class="json-string">"${escapeHtml(item)}"</span>${itemComma}`;
+                }).join('\n');
+                return `\n${keyHtml}[\n${items}\n  ]${comma}`;
+            } else {
+                return `${keyHtml}<span class="json-string">"${escapeHtml(val)}"</span>${comma}`;
+            }
+        });
+        return `{\n${lines.join('\n')}\n}`;
+    }
+
+    async function loadPortfolioData() {
+        try {
+            // 1. Cargar data/skills.json
+            const skillsRes = await fetch('data/skills.json', { cache: 'no-store' });
+            if (skillsRes.ok) {
+                const skillsData = await skillsRes.json();
+                const codeEs = document.querySelector('#skills .json-viewer .lang-es code');
+                const codeEn = document.querySelector('#skills .json-viewer .lang-en code');
+                if (codeEs && skillsData.es) {
+                    codeEs.innerHTML = formatJsonWithHighlight(skillsData.es);
+                }
+                if (codeEn && skillsData.en) {
+                    codeEn.innerHTML = formatJsonWithHighlight(skillsData.en);
+                }
+            }
+
+            // 2. Cargar data/projects.json
+            const projectsRes = await fetch('data/projects.json', { cache: 'no-store' });
+            if (projectsRes.ok) {
+                const projectsData = await projectsRes.json();
+                const projectsGrid = document.querySelector('#projects .projects-grid');
+                if (projectsGrid && Array.isArray(projectsData)) {
+                    projectsGrid.innerHTML = projectsData.map(proj => {
+                        const statusClass = proj.status?.key || 'deployed';
+                        const statusEs = escapeHtml(proj.status?.es || '● En producción');
+                        const statusEn = escapeHtml(proj.status?.en || '● Live');
+                        const techsHtml = (proj.technologies || [])
+                            .map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`)
+                            .join('');
+                        const reposHtml = (proj.repositories || [])
+                            .map(r => `
+                                <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <span class="lang-es">${escapeHtml(r.label?.es || '[ Repositorio ]')}</span>
+                                    <span class="lang-en">${escapeHtml(r.label?.en || '[ Repo ]')}</span>
+                                </a>`)
+                            .join('');
+                        const demoHtml = proj.demo_url ? `
+                                <a href="${escapeHtml(proj.demo_url)}" target="_blank" rel="noopener noreferrer" class="project-link demo-link">
+                                    <span class="lang-es">[ Ir a la Web ]</span>
+                                    <span class="lang-en">[ Visit Web ]</span>
+                                </a>` : '';
+
+                        return `
+                        <article class="project-card" id="${escapeHtml(proj.slug || proj.id)}">
+                            <div class="project-header">
+                                <h2 class="project-title">${escapeHtml(proj.title)}</h2>
+                                <span class="status-badge ${escapeHtml(statusClass)}">
+                                    <span class="lang-es">${statusEs}</span>
+                                    <span class="lang-en">${statusEn}</span>
+                                </span>
+                            </div>
+                            <p class="project-desc lang-es">${escapeHtml(proj.description?.es || '')}</p>
+                            <p class="project-desc lang-en">${escapeHtml(proj.description?.en || '')}</p>
+                            <div class="project-techs" aria-label="Tecnologías utilizadas">
+                                ${techsHtml}
+                            </div>
+                            <div class="project-links">
+                                ${reposHtml}
+                                ${demoHtml}
+                            </div>
+                        </article>`;
+                    }).join('');
+                }
+            }
+
+            // 3. Cargar data/certificates.json
+            const certsRes = await fetch('data/certificates.json', { cache: 'no-store' });
+            if (certsRes.ok) {
+                const certsData = await certsRes.json();
+                const certsGrid = document.querySelector('#certificates .certificates-grid');
+                if (certsGrid && Array.isArray(certsData)) {
+                    certsGrid.innerHTML = certsData.map(cert => {
+                        const skillsHtml = (cert.skills || [])
+                            .map(s => `<span class="tech-tag">${escapeHtml(s)}</span>`)
+                            .join('');
+                        const titleEs = escapeHtml(cert.title?.es || '');
+                        const titleEn = escapeHtml(cert.title?.en || '');
+
+                        return `
+                        <article class="certificate-card" id="cert-${escapeHtml(cert.id)}">
+                            <div class="certificate-preview">
+                                <img src="${escapeHtml(cert.image)}" alt="${titleEs}" class="certificate-img" width="600" height="420" loading="lazy" decoding="async">
+                            </div>
+                            <div class="certificate-body">
+                                <div class="certificate-header">
+                                    <h2 class="certificate-title">
+                                        <span class="lang-es">${titleEs}</span>
+                                        <span class="lang-en">${titleEn}</span>
+                                    </h2>
+                                    <span class="certificate-issuer-badge">${escapeHtml(cert.issuer || '')}</span>
+                                </div>
+                                <p class="certificate-desc lang-es">${escapeHtml(cert.description?.es || '')}</p>
+                                <p class="certificate-desc lang-en">${escapeHtml(cert.description?.en || '')}</p>
+                                <div class="certificate-tags" aria-label="Habilidades asociadas">
+                                    ${skillsHtml}
+                                </div>
+                                <div class="certificate-actions">
+                                    <a href="${escapeHtml(cert.pdf)}" target="_blank" rel="noopener noreferrer" class="project-link demo-link">
+                                        <span class="lang-es">[ Ver Certificado (PDF) ]</span>
+                                        <span class="lang-en">[ View Certificate (PDF) ]</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>`;
+                    }).join('');
+                }
+            }
+
+            // 4. Cargar data/profile.json
+            const profileRes = await fetch('data/profile.json', { cache: 'no-store' });
+            if (profileRes.ok) {
+                const profile = await profileRes.json();
+                const aboutHeading = document.getElementById('about-heading');
+                if (aboutHeading && profile.title) {
+                    aboutHeading.innerHTML = `
+                        <span class="lang-es">${escapeHtml(profile.title.es || profile.name)}</span>
+                        <span class="lang-en">${escapeHtml(profile.title.en || profile.name)}</span>
+                    `;
+                }
+
+                const bioContainer = document.querySelector('#about .bio-output');
+                if (bioContainer && profile.bio) {
+                    const bioEs = bioContainer.querySelector('p.lang-es');
+                    const bioEn = bioContainer.querySelector('p.lang-en');
+                    if (bioEs && profile.bio.es) bioEs.textContent = profile.bio.es;
+                    if (bioEn && profile.bio.en) bioEn.textContent = profile.bio.en;
+                }
+
+                const infoGroups = document.querySelectorAll('#about .info-card .info-group ul');
+                if (infoGroups[0] && Array.isArray(profile.education)) {
+                    infoGroups[0].innerHTML = profile.education.map(ed => `
+                        <li>
+                            <strong class="${escapeHtml(ed.color || 'text-green')}">${escapeHtml(ed.title)}</strong>
+                            <br>
+                            <span class="lang-es">${escapeHtml(ed.desc?.es || '')}</span>
+                            <span class="lang-en">${escapeHtml(ed.desc?.en || '')}</span>
+                        </li>
+                    `).join('');
+                }
+                if (infoGroups[1] && Array.isArray(profile.technical_value)) {
+                    infoGroups[1].innerHTML = profile.technical_value.map(item => `
+                        <li>
+                            <strong class="text-cyan">
+                                <span class="lang-es">${escapeHtml(item.label?.es || '')}</span>
+                                <span class="lang-en">${escapeHtml(item.label?.en || '')}</span>
+                            </strong>
+                            <span class="lang-es">${escapeHtml(item.desc?.es || '')}</span>
+                            <span class="lang-en">${escapeHtml(item.desc?.en || '')}</span>
+                        </li>
+                    `).join('');
+                }
+
+                const availBadge = document.querySelector('#about .avatar-status-badge');
+                if (availBadge && profile.availability) {
+                    const availEs = availBadge.querySelector('.lang-es');
+                    const availEn = availBadge.querySelector('.lang-en');
+                    if (availEs && profile.availability.es) availEs.textContent = profile.availability.es;
+                    if (availEn && profile.availability.en) availEn.textContent = profile.availability.en;
+                }
+
+                const profileName = document.querySelector('#about .profile-name');
+                if (profileName && profile.name) profileName.textContent = profile.name;
+
+                const profileRole = document.querySelector('#about .profile-role');
+                if (profileRole && profile.degree) {
+                    const degEs = profileRole.querySelector('.lang-es');
+                    const degEn = profileRole.querySelector('.lang-en');
+                    if (degEs && profile.degree.es) degEs.textContent = profile.degree.es;
+                    if (degEn && profile.degree.en) degEn.textContent = profile.degree.en;
+                }
+
+                const metaValues = document.querySelectorAll('#about .profile-meta-grid .meta-value');
+                if (metaValues[0] && profile.location) {
+                    metaValues[0].textContent = profile.location;
+                }
+                if (metaValues[1] && profile.role) {
+                    metaValues[1].innerHTML = `
+                        <span class="lang-es">${escapeHtml(profile.role.es || '')}</span>
+                        <span class="lang-en">${escapeHtml(profile.role.en || '')}</span>
+                    `;
+                }
+                if (metaValues[2] && profile.status) {
+                    metaValues[2].innerHTML = `
+                        <span class="lang-es">${escapeHtml(profile.status.es || '')}</span>
+                        <span class="lang-en">${escapeHtml(profile.status.en || '')}</span>
+                    `;
+                }
+            }
+        } catch (err) {
+            console.error('Error cargando datos JSON del portfolio:', err);
+        }
+    }
+
+    loadPortfolioData();
+
+    // ------------------------------------------------------------------------
+    // 2. NAVEGACIÓN POR PESTAÑAS (Sidebar + Barra de Pestañas Móvil)
+    // ------------------------------------------------------------------------
+    const allNavLinks = document.querySelectorAll('.sidebar-nav .nav-link, .mobile-tabs-bar .mobile-tab-link');
     const sections = document.querySelectorAll('.terminal-section');
     const consoleBody = document.getElementById('console-body');
 
     function switchSection(targetId) {
-        navLinks.forEach(link => {
+        if (!sections.length) return;
+
+        allNavLinks.forEach(link => {
             const href = link.getAttribute('href');
-            if (href === `#${targetId}`) {
+            if (href === `#${targetId}` || href === `/#${targetId}`) {
                 link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+                if (link.classList.contains('mobile-tab-link')) {
+                    link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
             } else {
                 link.classList.remove('active');
+                link.removeAttribute('aria-current');
             }
         });
 
@@ -86,16 +319,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (consoleBody) {
             consoleBody.scrollTop = 0;
         }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    navLinks.forEach(link => {
+    allNavLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            switchSection(targetId);
-            closeMobileDrawer();
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                switchSection(targetId);
+                closeMobileDrawer();
+                history.replaceState(null, '', `#${targetId}`);
+            }
         });
     });
+
+    if (window.location.hash && sections.length > 0) {
+        const initialSec = window.location.hash.substring(1);
+        if (document.getElementById(initialSec)) {
+            switchSection(initialSec);
+        }
+    }
 
     // ------------------------------------------------------------------------
     // 3. CONTROLADOR DEL MENÚ MÓVIL (Drawer / Panel Lateral)
@@ -153,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ------------------------------------------------------------------------
-    // 4. FORMULARIO DE CONTACTO REAL CON LOGS TERMINAL DINÁMICOS
+    // 4. FORMULARIO DE CONTACTO DIRECTO (Web3Forms API — Sin abrir app de correo)
     // ------------------------------------------------------------------------
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
@@ -183,28 +428,49 @@ document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('name');
             const emailInput = document.getElementById('email');
             const messageInput = document.getElementById('message');
+            const keyInput = document.getElementById('web3forms-key');
+            const botcheckInput = document.getElementById('botcheck');
 
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-            const message = messageInput.value.trim();
+            if (botcheckInput && botcheckInput.checked) {
+                return;
+            }
+
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const message = messageInput ? messageInput.value.trim() : '';
+            const accessKey = keyInput ? keyInput.value.trim() : '';
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!name || name.length < 2) {
                 addLogLine(isES ? 'Error: El nombre debe tener al menos 2 caracteres.' : 'Error: Name must have at least 2 characters.', 'ERROR');
-                nameInput.focus();
+                if (nameInput) nameInput.focus();
                 return;
             }
 
             if (!email || !emailRegex.test(email)) {
                 addLogLine(isES ? 'Error: Ingresá un correo electrónico válido.' : 'Error: Please enter a valid email address.', 'ERROR');
-                emailInput.focus();
+                if (emailInput) emailInput.focus();
                 return;
             }
 
             if (!message || message.length < 5) {
                 addLogLine(isES ? 'Error: El mensaje debe tener al menos 5 caracteres.' : 'Error: Message must have at least 5 characters.', 'ERROR');
-                messageInput.focus();
+                if (messageInput) messageInput.focus();
+                return;
+            }
+
+            if (!accessKey || accessKey === 'TU_ACCESS_KEY_AQUI') {
+                addLogLine(
+                    isES
+                        ? 'Falta configurar tu Access Key gratuita de Web3Forms en index.html (id="web3forms-key").'
+                        : 'Missing Web3Forms Access Key in index.html (id="web3forms-key").',
+                    'ERROR'
+                );
+                if (formFeedback) {
+                    formFeedback.textContent = isES ? '⚠ Configurá tu Access Key en index.html' : '⚠ Set your Access Key in index.html';
+                    formFeedback.className = 'form-feedback-message error';
+                }
                 return;
             }
 
@@ -217,50 +483,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 formFeedback.className = 'form-feedback-message';
             }
 
-            addLogLine(isES ? 'Validando datos en cliente...' : 'Validating client data...', 'OK');
-
-            await new Promise(r => setTimeout(r, 150));
-            addLogLine(isES ? 'Conectando con endpoint actions/send_message.php...' : 'Connecting to actions/send_message.php endpoint...', 'OK');
-
-            const formData = new FormData(contactForm);
+            addLogLine(isES ? 'Validando datos de entrada...' : 'Validating input data...', 'OK');
+            addLogLine(isES ? 'Transmitiendo paquete encriptado al servidor de correo...' : 'Transmitting encrypted payload to mail server...', 'OK');
 
             try {
-                const response = await fetch('actions/send_message.php', {
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        access_key: accessKey,
+                        name: name,
+                        email: email,
+                        message: message,
+                        subject: `Portfolio Contact: Mensaje de ${name}`,
+                        from_name: 'Portfolio Terminal'
+                    })
                 });
 
-                const data = await response.json();
+                const result = await response.json();
 
-                if (response.ok && data.success) {
+                if (response.status === 200 && result.success) {
                     addLogLine(
-                        isES ? 'Mensaje insertado correctamente en PostgreSQL.' : 'Message stored successfully in PostgreSQL.',
+                        isES
+                            ? '¡Mensaje enviado con éxito! Santiago recibirá tu correo en breve.'
+                            : 'Message sent successfully! Santiago will receive your email shortly.',
                         'OK'
                     );
-
                     if (formFeedback) {
                         formFeedback.textContent = isES ? '✓ ¡Mensaje enviado con éxito!' : '✓ Message sent successfully!';
                         formFeedback.className = 'form-feedback-message success';
                     }
-
                     contactForm.reset();
                 } else {
-                    const errorMsg = data.message || (isES ? 'No se pudo registrar el mensaje.' : 'Failed to process message.');
-                    addLogLine(`Fallo en el servidor: ${errorMsg}`, 'ERROR');
-
-                    if (formFeedback) {
-                        formFeedback.textContent = `✗ ${errorMsg}`;
-                        formFeedback.className = 'form-feedback-message error';
-                    }
+                    throw new Error(result.message || 'Error en el servidor de correo');
                 }
-            } catch (err) {
-                console.error('Error de red:', err);
+            } catch (error) {
+                console.error('Error al enviar formulario:', error);
                 addLogLine(
-                    isES ? 'Error de conexión con el servidor.' : 'Connection error with server.',
+                    isES
+                        ? 'No se pudo enviar el mensaje. Podés escribir directamente a santiago.carrizo.dev@gmail.com'
+                        : 'Could not send message. You can write directly to santiago.carrizo.dev@gmail.com',
                     'ERROR'
                 );
                 if (formFeedback) {
-                    formFeedback.textContent = isES ? '✗ Error al conectar con el servidor.' : '✗ Error connecting to server.';
+                    formFeedback.textContent = isES ? '✕ Error al enviar. Intentá de nuevo.' : '✕ Failed to send. Please try again.';
                     formFeedback.className = 'form-feedback-message error';
                 }
             } finally {
@@ -273,118 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ------------------------------------------------------------------------
-    // 5. MINI TERMINAL CLI INTERACTIVA
-    // ------------------------------------------------------------------------
-    const cliInput = document.getElementById('cli-input');
-    const cliOutput = document.getElementById('cli-output');
-
-    if (cliInput && cliOutput) {
-        cliInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = cliInput.value.trim().toLowerCase();
-                if (!cmd) return;
-
-                const isES = body.classList.contains('lang-es');
-                cliOutput.classList.add('active');
-
-                let responseHtml = '';
-
-                switch (cmd) {
-                    case 'help':
-                    case 'ayuda':
-                        responseHtml = isES
-                            ? `<strong>Comandos disponibles:</strong><br>
-                               • <code>about</code> / <code>sobre-mi</code>: Ir a Sobre mí.<br>
-                               • <code>skills</code> / <code>habilidades</code>: Ir a Habilidades.<br>
-                               • <code>projects</code> / <code>proyectos</code>: Ir a Proyectos.<br>
-                               • <code>contact</code> / <code>contacto</code>: Ir a Contacto.<br>
-                               • <code>cv</code> / <code>resume</code>: Descargar CV en tu idioma actual.<br>
-                               • <code>github</code> / <code>repo</code>: Abrir GitHub.<br>
-                               • <code>whoami</code>: Resumen del desarrollador.<br>
-                               • <code>clear</code> / <code>cls</code>: Limpiar consola.`
-                            : `<strong>Available commands:</strong><br>
-                               • <code>about</code>: Go to About.<br>
-                               • <code>skills</code>: Go to Skills.<br>
-                               • <code>projects</code>: Go to Projects.<br>
-                               • <code>contact</code>: Go to Contact.<br>
-                               • <code>cv</code> / <code>resume</code>: Download CV in current language.<br>
-                               • <code>github</code> / <code>repo</code>: Open GitHub.<br>
-                               • <code>whoami</code>: Developer summary.<br>
-                               • <code>clear</code> / <code>cls</code>: Clear output.`;
-                        break;
-
-                    case 'about':
-                    case 'sobre-mi':
-                        switchSection('about');
-                        responseHtml = isES ? 'Cambiando a ~/sobre-mi...' : 'Switching to ~/about...';
-                        break;
-
-                    case 'skills':
-                    case 'habilidades':
-                        switchSection('skills');
-                        responseHtml = isES ? 'Cambiando a ~/habilidades...' : 'Switching to ~/skills...';
-                        break;
-
-                    case 'projects':
-                    case 'proyectos':
-                        switchSection('projects');
-                        responseHtml = isES ? 'Cambiando a ~/proyectos...' : 'Switching to ~/projects...';
-                        break;
-
-                    case 'contact':
-                    case 'contacto':
-                        switchSection('contact');
-                        responseHtml = isES ? 'Cambiando a ~/contacto...' : 'Switching to ~/contact...';
-                        break;
-
-                    case 'cv':
-                    case 'resume':
-                        const cvFile = isES ? 'assets/CV_Santiago_Carrizo.pdf' : 'assets/CV_Santiago_Carrizo_English.pdf';
-                        window.open(cvFile, '_blank');
-                        responseHtml = isES ? 'Iniciando descarga de CV_Santiago_Carrizo.pdf...' : 'Starting download of CV_Santiago_Carrizo_English.pdf...';
-                        break;
-
-                    case 'github':
-                    case 'repo':
-                        window.open('https://github.com/Santiago-Carrizo7', '_blank');
-                        responseHtml = 'Abriendo GitHub...';
-                        break;
-
-                    case 'whoami':
-                    case 'quiensoy':
-                        responseHtml = '<strong>Santiago Carrizo</strong> — Full Stack Developer (React 19, TypeScript, Node.js, Express 5, PostgreSQL, Flutter)';
-                        break;
-
-                    case 'email':
-                    case 'correo':
-                        responseHtml = isES
-                            ? `Email: <a href="mailto:santiago.carrizo.dev@gmail.com" style="color:var(--color-green)">santiago.carrizo.dev@gmail.com</a> (Hacé clic en Copiar Email en el menú)`
-                            : `Email: <a href="mailto:santiago.carrizo.dev@gmail.com" style="color:var(--color-green)">santiago.carrizo.dev@gmail.com</a> (Click Copy Email in the sidebar)`;
-                        break;
-
-                    case 'clear':
-                    case 'cls':
-                        cliOutput.innerHTML = '';
-                        cliOutput.classList.remove('active');
-                        cliInput.value = '';
-                        return;
-
-                    default:
-                        responseHtml = isES
-                            ? `<span style="color:var(--color-red)">Comando no reconocido: <code>${cmd}</code>. Escribí <code>help</code>.</span>`
-                            : `<span style="color:var(--color-red)">Command not recognized: <code>${cmd}</code>. Type <code>help</code>.</span>`;
-                        break;
-                }
-
-                cliOutput.innerHTML = `<div style="margin-bottom:4px;"><span style="color:var(--color-green)">$ ${cmd}</span></div><div>${responseHtml}</div>`;
-                cliInput.value = '';
-                cliOutput.scrollTop = cliOutput.scrollHeight;
-            }
-        });
-    }
-
-    // ------------------------------------------------------------------------
-    // 6. TOAST NOTIFICATIONS HELPER (Estilo Terminal)
+    // 5. TOAST NOTIFICATIONS HELPER (Estilo Terminal)
     // ------------------------------------------------------------------------
     let toastTimeout = null;
     function showTerminalToast(message) {
@@ -405,14 +563,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ------------------------------------------------------------------------
-    // 7. RELOJ Y FECHA DINÁMICOS EN VIVO (STATUS BAR FOOTER)
+    // 6. RELOJ Y FECHA DINÁMICOS EN VIVO (STATUS BAR FOOTER & SOBRE MÍ)
     // ------------------------------------------------------------------------
     function updateLiveClock() {
         const now = new Date();
         const clockES = document.getElementById('status-clock-es');
         const clockEN = document.getElementById('status-clock-en');
-
-        if (!clockES && !clockEN) return;
+        const lastLoginES = document.getElementById('last-login-es');
+        const lastLoginEN = document.getElementById('last-login-en');
 
         const optionsDateES = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
         const dateStrES = now.toLocaleDateString('es-AR', optionsDateES);
@@ -425,11 +583,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const seconds = String(now.getSeconds()).padStart(2, '0');
         const timeStr = `${hours}:${minutes}:${seconds}`;
 
+        // Footer status bar
         if (clockES) {
             clockES.textContent = `sesión activa: ${dateStrES}, ${timeStr} en ttys001`;
         }
         if (clockEN) {
             clockEN.textContent = `active session: ${dateStrEN}, ${timeStr} on ttys001`;
+        }
+
+        // Sección Sobre Mí (último inicio de sesión sincronizado en vivo)
+        if (lastLoginES) {
+            lastLoginES.textContent = `Último inicio de sesión: ${dateStrES}, ${timeStr} en ttys001`;
+        }
+        if (lastLoginEN) {
+            lastLoginEN.textContent = `Last login: ${dateStrEN}, ${timeStr} on ttys001`;
         }
     }
 
@@ -470,55 +637,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // ------------------------------------------------------------------------
-    // 9. CONTROLES DE VENTANA (HEADER WINDOW BUTTONS)
-    // ------------------------------------------------------------------------
-    const winBtnClose = document.getElementById('win-btn-close');
-    const winBtnMinimize = document.getElementById('win-btn-minimize');
-    const winBtnMaximize = document.getElementById('win-btn-maximize');
-
-    if (winBtnMaximize) {
-        winBtnMaximize.addEventListener('click', () => {
-            const isES = body.classList.contains('lang-es');
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().then(() => {
-                    showTerminalToast(isES ? '[ PANTALLA COMPLETA ACTIVADA ]' : '[ FULLSCREEN ENABLED ]');
-                }).catch(() => {
-                    showTerminalToast(isES ? '[ INFO ] Modo maximizado' : '[ INFO ] Maximized mode');
-                });
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen().then(() => {
-                        showTerminalToast(isES ? '[ PANTALLA COMPLETA DESACTIVADA ]' : '[ FULLSCREEN DISABLED ]');
-                    });
-                }
-            }
-        });
-    }
-
-    if (winBtnMinimize) {
-        winBtnMinimize.addEventListener('click', () => {
-            const isES = body.classList.contains('lang-es');
-            const layout = document.querySelector('.terminal-layout');
-            if (layout) {
-                layout.classList.toggle('minimized-layout');
-                const isMin = layout.classList.contains('minimized-layout');
-                showTerminalToast(
-                    isES
-                        ? (isMin ? '[ MODO FOCO: SIDEBAR OCULTO ]' : '[ VISTA ESTÁNDAR RESTAURADA ]')
-                        : (isMin ? '[ FOCUS MODE: SIDEBAR HIDDEN ]' : '[ STANDARD VIEW RESTORED ]')
-                );
-            }
-        });
-    }
-
-    if (winBtnClose) {
-        winBtnClose.addEventListener('click', () => {
-            const isES = body.classList.contains('lang-es');
-            switchSection('about');
-            if (consoleBody) consoleBody.scrollTop = 0;
-            showTerminalToast(isES ? '[ SESIÓN REINICIADA: ~/sobre-mi ]' : '[ SESSION RESTARTED: ~/about ]');
-        });
-    }
 });
+
